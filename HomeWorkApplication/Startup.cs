@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using HomeWorkApplication.DAL;
+using HomeWorkApplication.DAL.Entities;
 
 namespace HomeWorkApplication
 {
@@ -27,13 +28,33 @@ namespace HomeWorkApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string connectionString = Configuration.GetConnectionString("MainConnectionString");
+
+            var optionsBuilder = new DbContextOptionsBuilder();
+            optionsBuilder.UseSqlServer(connectionString);
+
+           
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            {
+                options.UseSqlServer(connectionString);
+            });
+
+            services.AddSingleton<IApplicationDbContextFactory>(
+                sp => new ApplicationDbContextFactory(
+                    optionsBuilder.Options
+                ));
+
+            services.AddSingleton<IUnitOfWorkFactory, UnitOfWorkFactory>();
+
+            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

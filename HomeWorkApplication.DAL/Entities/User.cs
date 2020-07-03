@@ -7,8 +7,6 @@ namespace HomeWorkApplication.DAL.Entities
 {
     public class User: IdentityUser<int>, Entity
     {
-        public int BucketId { get; set; }
-
         public Bucket Bucket { get; set; }
     }
 }

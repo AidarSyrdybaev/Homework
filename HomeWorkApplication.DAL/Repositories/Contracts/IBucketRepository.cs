@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HomeWorkApplication.DAL.Repositories.Contracts
 {
-    interface IBucketRepository: IRepository<Bucket>
+    public interface IBucketRepository: IRepository<Bucket>
     {
     }
 }

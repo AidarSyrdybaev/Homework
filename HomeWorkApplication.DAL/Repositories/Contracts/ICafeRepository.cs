@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HomeWorkApplication.DAL.Repositories.Contracts
 {
-    interface ICafeRepository: IRepository<Cafe>
+    public interface ICafeRepository: IRepository<Cafe>
     {
     }
 }

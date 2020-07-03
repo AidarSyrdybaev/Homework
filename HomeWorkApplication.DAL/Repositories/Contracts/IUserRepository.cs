@@ -5,7 +5,7 @@ using HomeWorkApplication.DAL.Entities;
 
 namespace HomeWorkApplication.DAL.Repositories.Contracts
 {
-    interface IUserRepository: IRepository<User>
+    public interface IUserRepository: IRepository<User>
     {
     }
 }

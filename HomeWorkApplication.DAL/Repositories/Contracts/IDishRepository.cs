@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HomeWorkApplication.DAL.Repositories.Contracts
 {
-    interface IDishRepository: IRepository<Dish>
+    public interface IDishRepository: IRepository<Dish>
     {
     }
 }

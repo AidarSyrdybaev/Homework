@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HomeWorkApplication.DAL.Repositories.Contracts
 {
-    interface IRepository<T> where T: Entity
+    public interface IRepository<T> where T: Entity
     {
         T Create(T entity);
 
