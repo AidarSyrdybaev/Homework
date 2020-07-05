@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -13,6 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using HomeWorkApplication.DAL;
 using HomeWorkApplication.DAL.Entities;
+using HomeWorkApplication.Services;
+using HomeWorkApplication.Services.Contracts;
 
 namespace HomeWorkApplication
 {
@@ -45,14 +48,21 @@ namespace HomeWorkApplication
                     optionsBuilder.Options
                 ));
 
-            services.AddSingleton<IUnitOfWorkFactory, UnitOfWorkFactory>();
-
             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddSingleton<IUnitOfWorkFactory, UnitOfWorkFactory>();
+
+            services.AddSingleton<IHomeService, HomeService>();
+
+            services.AddSingleton<IBucketService, BucketService>();
+
+            services.AddSingleton<IOrderService, OrderService>();
+
+
             services.AddControllersWithViews();
             services.AddRazorPages();
-
+            Mapper.Initialize(config=> config.AddProfile(new MapperProfile()));
 
 
         }

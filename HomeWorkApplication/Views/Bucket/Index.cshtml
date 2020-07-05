@@ -1,0 +1,32 @@
+﻿@model IEnumerable<HomeWorkApplication.Models.Bucket.BucketViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Корзины</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Название кафе:
+            </th>
+            <th>
+                Действие:
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+               Корзина Кафе: @Html.DisplayFor(modelItem => item.Cafe.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Bucket", "Details", new { item.Id }) |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

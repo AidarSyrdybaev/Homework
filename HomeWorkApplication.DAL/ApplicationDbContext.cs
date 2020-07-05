@@ -16,6 +16,8 @@ namespace HomeWorkApplication.DAL
 
         public DbSet<Bucket> Buckets { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
         {

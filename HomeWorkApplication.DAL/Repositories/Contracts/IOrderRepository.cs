@@ -5,8 +5,7 @@ using System.Text;
 
 namespace HomeWorkApplication.DAL.Repositories.Contracts
 {
-    public interface ICafeRepository: IRepository<Cafe>
+    public interface IOrderRepository: IRepository<Order>
     {
-        Cafe GetCafeAllDish(int Id);
     }
 }

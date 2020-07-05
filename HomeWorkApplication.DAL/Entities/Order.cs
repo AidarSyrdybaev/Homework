@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HomeWorkApplication.DAL.Entities
 {
-    public class Bucket: Entity
+    public class Order: Entity
     {
         public int Id { get; set; }
 
@@ -17,5 +17,6 @@ namespace HomeWorkApplication.DAL.Entities
         public Cafe Cafe { get; set; }
 
         public string JsonDishes { get; set; }
+
     }
 }

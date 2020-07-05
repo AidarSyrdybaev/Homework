@@ -7,5 +7,6 @@ namespace HomeWorkApplication.DAL.Repositories.Contracts
 {
     public interface IBucketRepository: IRepository<Bucket>
     {
+        List<Bucket> GetAllBucketsWithUserWithCafe(int Id);
     }
 }

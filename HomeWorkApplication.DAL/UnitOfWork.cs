@@ -6,7 +6,7 @@ using HomeWorkApplication.DAL.Repositories.Contracts;
 
 namespace HomeWorkApplication.DAL
 {
-    public class UnitOfWork
+    public class UnitOfWork: IDisposable
     {
         private readonly ApplicationDbContext _context;
         private bool _disposed;
@@ -19,6 +19,8 @@ namespace HomeWorkApplication.DAL
 
         public IDishRepository Dishes { get; }
 
+        public IOrderRepository Orders { get; }
+
         public UnitOfWork(ApplicationDbContext applicationDbContext)
         {
             _context = applicationDbContext;
@@ -26,6 +28,7 @@ namespace HomeWorkApplication.DAL
             Cafees = new CafeRepository(applicationDbContext);
             Users = new UserRepository(applicationDbContext);
             Dishes = new DishRepository(applicationDbContext);
+            Orders = new OrderRepository(applicationDbContext);
         }
 
         #region Disposable

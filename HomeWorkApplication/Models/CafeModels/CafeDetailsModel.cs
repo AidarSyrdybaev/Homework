@@ -1,10 +1,12 @@
-﻿using System;
+﻿using HomeWorkApplication.DAL.Entities;
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace HomeWorkApplication.DAL.Entities
+namespace HomeWorkApplication.Models.CafeModels
 {
-    public class Cafe: Entity
+    public class CafeDetailsModel
     {
         public int Id { get; set; }
 
@@ -13,9 +15,5 @@ namespace HomeWorkApplication.DAL.Entities
         public string Description { get; set; }
 
         public List<Dish> Dishes { get; set; }
-
-        public List<Bucket> Buckets { get; set; }
-
-        public List<Order> Order { get; set; }
     }
 }
