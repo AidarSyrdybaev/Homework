@@ -18,5 +18,7 @@ namespace HomeWorkApplication.DAL.Entities
 
         public Cafe Cafe { get; set; }
 
+        public List<Dish> Dishes { get; set; }
+
     }
 }

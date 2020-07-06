@@ -20,23 +20,25 @@ namespace HomeWorkApplication.Controllers
             _orderService = orderService;
             _userManager = userManager;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var user = _userManager.GetUserAsync(User);
+            var user = await _userManager.GetUserAsync(User);
             var OrderModel = _orderService.GetOrderViewModel(user.Id);
             return View(OrderModel);
         }
 
-        public async Task<IActionResult> ToOrder(int UserId, int CafeId, string JsonDishes)
+        public async Task<IActionResult> ToOrder(int CafeId, string JsonDishes)
         {
-            var Check = _orderService.CreateOrder(UserId, CafeId, JsonDishes);
+            var user = await _userManager.GetUserAsync(User);
+            var Check = _orderService.CreateOrder(user.Id, CafeId, JsonDishes);
             if (Check)
             {
                 return RedirectToAction("Index", "Order");
             }
             else
             {
-                throw new Exception("Вы уже осуществили заказ");
+                ViewBag.BadRequestMessage = "Вы уже осуществили заказ";
+                return View("BadRequest");
             }
                 
         }

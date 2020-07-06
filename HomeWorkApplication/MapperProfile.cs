@@ -42,7 +42,8 @@ namespace HomeWorkApplication
         private void OrderToOrderModel()
         {
             CreateMap<Order, OrderViewModel>().ForMember(target => target.BucketItems,
-                src => src.MapFrom(source => JsonConvert.DeserializeObject(source.JsonDishes)));
+                src => src.MapFrom(source => JsonConvert.DeserializeObject<List<BucketItem>>(source.JsonDishes)));
+            
         }
     }
 }

@@ -18,6 +18,8 @@ namespace HomeWorkApplication.DAL
 
         public DbSet<Order> Orders { get; set; }
 
+        public DbSet<DishPicture> DishPictures { get; set; }
+
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
         {

@@ -23,56 +23,59 @@
 </div>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                Наименование блюда
-            </th>
-            <th>
-                Описание блюда
-            </th>
-            <th>
-                Цена блюда
-            </th>
-            <th>
-                Количество:
-            </th>
-            <th>
-                Общая сумма:
-            </th>
-            <th>
-                Действие:
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            Наименование блюда
+        </th>
+        <th>
+            Описание блюда
+        </th>
+        <th>
+            Цена блюда
+        </th>
+        <th>
+            Количество:
+        </th>
+        <th>
+            Общая сумма:
+        </th>
+        <th>
+            Действие:
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var dish in Model.BucketItems)
-        {
-            <tr>
-                <td>@dish.Dish.Name</td>
-                <td>@dish.Dish.Description</td>
-                <td>@dish.Dish.Price</td>
-                <td>@dish.DishCount</td>
-                <td>@(dish.DishCount*dish.Dish.Price)</td>
-                <td>
-                    <form asp-action="Delete" asp-controller="Bucket" method="post">
-                        <input type="hidden" name="DishId" value="@dish.Id" />
-                        <input type="hidden" name="CafeId" value="@Model.Cafe.Id" />
-                        <input type="submit" value="удалить из корзины" />
-                    </form>
-                </td>
-            </tr>
-        }
+    @foreach (var dish in Model.BucketItems)
+    {
+        <tr>
+            <td>@dish.Dish.Name</td>
+            <td>@dish.Dish.Description</td>
+            <td>@dish.Dish.Price</td>
+            <td>@dish.DishCount</td>
+            <td>@(dish.DishCount*dish.Dish.Price)</td>
+            <td>
+                <form asp-action="Delete" asp-controller="Bucket" method="post">
+                    <input type="hidden" name="DishId" value="@dish.Id" />
+                    <input type="hidden" name="CafeId" value="@Model.Cafe.Id" />
+                    <input type="submit" value="удалить из корзины" />
+                </form>
+            </td>
+        </tr>
+    }
     </tbody>
 </table>
-<form asp-action="ToOrder" asp-controller="Order" method="post">
-    <input type="hidden" name="UserId" value="@UserManager.GetUserAsync(User).Id" />
-    <input type="hidden" name="CafeId" value="@Model.Cafe.Id" />
-    <input type="hidden" name="JsonDishes" value="@Model.JsonDishes" />
-    <input type="submit" value="Заказать" />
-</form>
-<div>
-    Общая сумма:@Model.BucketItems.Sum(i => i.DishCount * i.Dish.Price);
-</div>
+@if (Model.BucketItems.Count > 0)
+{
+    <form asp-action="ToOrder" asp-controller="Order" method="post">
+        <input type="hidden" name="CafeId" value="@Model.Cafe.Id"/>
+        <input type="hidden" name="JsonDishes" value="@Model.JsonDishes"/>
+        <input type="submit" value="Заказать"/>
+    </form>
+    <div>
+        Общая сумма:@Model.BucketItems.Sum(i => i.DishCount * i.Dish.Price);
+    </div>
+}
+
 
 
